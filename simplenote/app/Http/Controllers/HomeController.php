@@ -31,4 +31,13 @@ class HomeController extends Controller
         $user = \Auth::user();
         return view('create', compact('user'));
     }
+
+    public function store(Request $request)
+    {
+        $data = $request->all();
+        dd($data);
+        //$memo_id = Memo::insertGetId(['content' => $data['content'], 'user_id' => $data['user_id'], 'status' => 1]);
+
+        return redirect()->route('home');
+    }
 }
