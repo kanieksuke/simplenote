@@ -50,6 +50,7 @@ class HomeController extends Controller
         $user = \Auth::user();
         $memo = Memo::where('status', 1)->where('id', $id)->where('user_id', $user['id'])
             ->first();
-            return view('edit',compact('memo', 'user'));
+        $memos = Memo::where('user_id', $user['id'])->where('status', 1)->orderBy('updated_at', 'DESC')->get();
+        return view('edit',compact('memo', 'user', 'memos'));
     }
 }
