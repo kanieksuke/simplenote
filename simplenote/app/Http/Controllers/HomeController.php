@@ -28,6 +28,7 @@ class HomeController extends Controller
 
     public function create()
     {
-        return view('create');
+        $user = \Auth::user();
+        return view('create', compact('user'));
     }
 }
