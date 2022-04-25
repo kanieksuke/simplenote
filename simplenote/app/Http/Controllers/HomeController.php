@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Memo;
+use App\Tag;
 
 class HomeController extends Controller
 {
@@ -39,9 +40,11 @@ class HomeController extends Controller
     public function store(Request $request)
     {
         $data = $request->all();
-        // dd($data);
+        
+        $tag_id = Tag::insertGetId(['name' => $data['tag'], 'user_id' => $data['user_id']]);
+
         $memo_id = Memo::insertGetId([
-            'content' => $data['content'], 'user_id' => $data['user_id'], 'status' => 1
+            'content' => $data['content'], 'user_id' => $data['user_id'], 'tag_id' => $tag_id, 'status' => 1
         ]);
 
         return redirect()->route('home');
