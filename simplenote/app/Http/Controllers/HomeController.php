@@ -62,7 +62,7 @@ class HomeController extends Controller
     public function update(Request $request, $id)
     {
         $inputs = $request->all();
-        Memo::where('id', $id)->update(['content' => $inputs['content']]);
+        Memo::where('id', $id)->update(['content' => $inputs['content'], 'tag_id' => $inputs['tag_id']]);
         return redirect()->route('home');
     }
 }
