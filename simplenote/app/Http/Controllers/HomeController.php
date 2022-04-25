@@ -53,4 +53,11 @@ class HomeController extends Controller
         $memos = Memo::where('user_id', $user['id'])->where('status', 1)->orderBy('updated_at', 'DESC')->get();
         return view('edit',compact('memo', 'user', 'memos'));
     }
+
+    public function update(Request $request, $id)
+    {
+        $inputs = $request->all();
+        Memo::where('id', $id)->update(['content' => $inputs['content']]);
+        return redirect()->route('home');
+    }
 }
