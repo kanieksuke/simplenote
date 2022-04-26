@@ -70,4 +70,11 @@ class HomeController extends Controller
         Memo::where('id', $id)->update(['content' => $inputs['content'], 'tag_id' => $inputs['tag_id']]);
         return redirect()->route('home');
     }
+
+    public function delete(Request $request, $id)
+    {
+        $inputs = $request->all();
+        Memo::where('id', $id)->update([ 'status' => 2 ]);
+        return redirect()->route('home')->with('success', 'メモの削除が完了しました！');
+    }
 }
