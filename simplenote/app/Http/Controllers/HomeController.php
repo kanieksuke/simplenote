@@ -75,6 +75,6 @@ class HomeController extends Controller
     {
         $inputs = $request->all();
         Memo::where('id', $id)->update([ 'status' => 2 ]);
-        return redirect()->route('home');
+        return redirect()->route('home')->with('success', 'メモの削除が完了しました！');
     }
 }
