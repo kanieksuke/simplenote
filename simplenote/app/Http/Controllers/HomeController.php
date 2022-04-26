@@ -41,7 +41,12 @@ class HomeController extends Controller
     {
         $data = $request->all();
         
-        $tag_id = Tag::insertGetId(['name' => $data['tag'], 'user_id' => $data['user_id']]);
+        $exist_tag = Tag::where('name', $data['tag'])->where('user_id', $data['user_id'])->first();
+        if( empty($exist_tag['id']) ){
+            $tag_id = Tag::insertGetId(['name' => $data['tag'], 'user_id' => $data['user_id']]);
+        }else{
+            $tag_id = $exist_tag['id'];
+        }
 
         $memo_id = Memo::insertGetId([
             'content' => $data['content'], 'user_id' => $data['user_id'], 'tag_id' => $tag_id, 'status' => 1
