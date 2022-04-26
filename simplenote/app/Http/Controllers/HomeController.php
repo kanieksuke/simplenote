@@ -27,7 +27,7 @@ class HomeController extends Controller
     {
         $user = \Auth::user();
         $memos = Memo::where('user_id', $user['id'])->where('status', 1)->orderBy('updated_at', 'DESC')->get();
-        return view('home', compact('user', 'memos'));
+        return view('create', compact('user', 'memos'));
     }
 
     public function create()
