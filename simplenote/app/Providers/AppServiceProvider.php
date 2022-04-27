@@ -29,7 +29,7 @@ class AppServiceProvider extends ServiceProvider
             $user = \Auth::user();
 
             $memoModel = new Memo();
-            $memos = Memo::where('user_id', \Auth::id())->where('status', 1)->orderBy('updated_at', 'DESC')->get();
+            $memos = $memoModel->myMemo( \Auth::id() );
 
             $tagModel = new Tag();
             $tags = $tagModel->where('user_id', \Auth::id())->get();
